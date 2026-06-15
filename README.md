@@ -7,6 +7,10 @@ A complete Hyprland rice on Arch Linux using Catppuccin Mocha theme.
 - **Theme:** Catppuccin Mocha
 - **Font:** JetBrainsMono Nerd Font
 
+## Preview
+
+![Rice screenshot](screenshots/rice.png)
+
 ## Components
 - Hyprland
 - Waybar
