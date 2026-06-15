@@ -86,3 +86,56 @@ Copy it to `~/.config/kitty/kitty.conf`:
 mkdir -p ~/.config/kitty
 cp dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ```
+
+## Waybar
+
+```bash
+sudo pacman -S waybar
+```
+
+### Module Dependencies
+
+Each right-side module calls an external tool on click/scroll. Install these:
+
+```bash
+yay -S wifitui bluetui
+sudo pacman -S brightnessctl htop btop pipewire-pulse wireplumber
+```
+
+| Module | Tool | Purpose |
+|---|---|---|
+| `network` | `wifitui` | TUI WiFi manager, opens on click |
+| `bluetooth` | `bluetui` | TUI Bluetooth manager, opens on click |
+| `backlight` | `brightnessctl` | Scroll to adjust screen brightness |
+| `cpu` | `htop` | Opens on click for process view |
+| `memory` | `btop` | Opens on click for resource monitor |
+| `pulseaudio` + volume buttons | `wpctl` (WirePlumber) | Volume control |
+| `custom/power` | `~/.config/rofi/scripts/powermenu.sh` | Power menu |
+| `temperature` | `thermal-zone 5` (`x86_pkg_temp`) | CPU package temperature — zone number may differ per machine, check with: `grep -r x86_pkg_temp /sys/class/thermal/thermal_zone*/type` |
+
+### Layout
+
+- **Left:** workspaces — numbered circles, golden when active, only shown if a window exists (or it's the active workspace)
+- **Center:** clock — day, date, time
+- **Right:** network, bluetooth, backlight, volume controls, battery, cpu, memory, temperature, power button
+
+### Auto-reload on save
+
+```bash
+cp scripts/auto-reload.sh ~/
+chmod +x ~/auto-reload.sh
+~/auto-reload.sh &
+```
+
+This watches `~/.config/waybar/` and restarts waybar automatically when config or style files are saved.
+
+### Config
+
+- [`dotfiles/waybar/config.jsonc`](dotfiles/waybar/config.jsonc)
+- [`dotfiles/waybar/style.css`](dotfiles/waybar/style.css)
+
+```bash
+mkdir -p ~/.config/waybar
+cp dotfiles/waybar/config.jsonc ~/.config/waybar/
+cp dotfiles/waybar/style.css ~/.config/waybar/
+```

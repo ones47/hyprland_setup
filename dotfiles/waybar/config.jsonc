@@ -1,0 +1,131 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 40,
+	"spacing": 4,
+
+	"modules-left": ["hyprland/workspaces"],
+	"modules-center": ["clock"],
+	"modules-right": [
+		"network","bluetooth", "backlight",
+		"pulseaudio", "custom/vol_minus", "custom/vol_mute", "custom/vol_plus",
+		"battery", "cpu", "memory", "temperature", "custom/power"
+	],
+
+	"custom/power": {
+		"format": "⏻",
+		"on-click": "~/.config/rofi/scripts/powermenu.sh",
+		"tooltip": false
+	},
+
+	"network": {
+		"format-wifi": "",
+		"format-ethernet": "󰈀",
+		"format-disconnected": "󰖪",
+		"tooltip": true,
+		"tooltip-format-wifi": "Wi-Fi: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}\nGateway: {gwaddr}",
+		"tooltip-format-ethernet": "Ethernet: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}",
+		"tooltip-format-disconnected": "Disconnected",
+		"on-click": "kitty -e wifitui"
+	},
+
+	"backlight": {
+		"format": "{icon} {percent}%",
+		"format-icons": ["󰃞", "󰃟", "󰃠"],
+		"tooltip": false,
+		"on-scroll-up": "brightnessctl set 1%+",
+		"on-scroll-down": "brightnessctl set 1%-"
+	},
+
+	"bluetooth": {
+		"format": "󰂲", // Cancelled/Disconnected icon
+		"format-disabled": "󰂲",
+		"format-connected": " {num_connections}",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"on-click": "kitty -e bluetui"
+	},
+
+	"hyprland/workspaces": {
+		"format": "{id}",
+		"on-click": "activate",
+		"sort-by-number": true,
+		"active-only": false,
+		"ignore-workspaces": ["special"],
+		"persistent-workspaces": {},
+		"show-special": false,
+		"all-outputs": false,
+		"format-icons": {},
+		"window-rewrite": {}
+	},
+
+	"clock": {
+		"format": " {:%a, %b %d   %H:%M}",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+	},
+
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-muted": "  Muted",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"default": ["", "", ""] // Dynamic sound waves (low, medium, high)
+		},
+		"tooltip": false
+	},
+
+	"custom/vol_minus": {
+		"format": "",
+		"on-click": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+		"tooltip": false
+	},
+
+	"custom/vol_mute": {
+		"format": "󰝟",
+		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+		"tooltip": false
+	},
+
+	"custom/vol_plus": {
+		"format": "",
+		"on-click": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+		"tooltip": false
+	},
+
+	"battery": {
+		"states": {
+			"critical": 20
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": " {capacity}%",
+		"format-plugged": " {capacity}%",
+		"format-icons": ["", "", "", "", ""],
+		"interval": 2
+	},
+
+	"cpu": {
+		"interval": 2,
+		"format": " {usage}%",
+		"tooltip": false,
+		"on-click": "kitty -e htop"
+	},
+
+	"memory": {
+		"interval": 2,
+		"format": " {percentage}%",
+		"tooltip": true,
+		"tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
+		"on-click": "kitty -e btop"
+	},
+
+	"temperature": {
+		"thermal-zone": 5,
+		"interval": 2,
+		"critical-threshold": 80,
+		"format": " {temperatureC}°C",
+		"format-critical": " {temperatureC}°C"
+	}
+}

@@ -1,0 +1,228 @@
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #cdd6f4;
+}
+
+#workspaces {
+    margin: 4px 8px;
+    padding: 0;
+}
+
+#workspaces button {
+    min-width: 28px;
+    min-height: 28px;
+    padding: 0;
+    margin: 0 3px;
+    border-radius: 50%;
+    background: #cdd6f4;
+    color: #1e1e2e;
+    font-weight: bold;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    border: none;
+    box-shadow: none;
+}
+
+#workspaces button:hover {
+    background: #b4befe;
+    color: #1e1e2e;
+}
+
+#workspaces button.active {
+    background: #f9e2af;
+    color: #1e1e2e;
+    font-weight: bold;
+}
+
+#workspaces button.empty {
+    background: transparent;
+    color: transparent;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces button.empty.active {
+    background: #f9e2af;
+    color: #1e1e2e;
+    min-width: 28px;
+    min-height: 28px;
+    margin: 0 3px;
+}
+
+#clock {
+    color: #cdd6f4;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0 10px;
+}
+ 
+/* --- Cohesive Hardware Capsule --- */
+#battery,
+#cpu,
+#memory,
+#temperature {
+    background: #313244; /* Catppuccin Surface 0 */
+    font-weight: bold;
+    padding: 4px 12px;
+    margin: 5px 0;
+}
+
+/* Far Left Item: Handles the left rounded corners */
+#battery {
+    color: #fab387; /* Catppuccin Peach (20-100% discharging) */
+    border-radius: 8px 0 0 8px;
+    padding-left: 14px;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #a6e3a1; /* Catppuccin Green (Charging) */
+}
+
+#battery.critical:not(.charging) {
+    color: #f38ba8; /* Catppuccin Red (Below 20%) */
+    animation-name: blink; /* Optional subtle alert animation */
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Middle Items: Flat edges, clean 1px left-borders for separators */
+#cpu {
+    color: #89b4fa; /* Catppuccin Blue */
+    border-radius: 0;
+    border-left: 1px solid #45475a;
+}
+
+#memory {
+    color: #cba6f7; /* Catppuccin Mauve */
+    border-radius: 0;
+    border-left: 1px solid #45475a;
+}
+
+/* Far Right Item: Handles the right rounded corners */
+#temperature {
+    color: #a6e3a1; /* Catppuccin Green */
+    border-radius: 0 8px 8px 0;
+    padding-right: 14px;
+    margin-right: 10px; 
+    border-left: 1px solid #45475a;
+}
+
+#temperature.critical {
+    color: #1e1e2e;
+    background: #f38ba8;
+}
+
+/* --- Volume Controller Capsule --- */
+#pulseaudio,
+#custom-vol_minus,
+#custom-vol_mute,
+#custom-vol_plus {
+    background: #313244; /* Catppuccin Surface 0 */
+    font-weight: bold;
+    padding: 4px 8px;
+    margin: 5px 0;
+}
+
+/* Far Left: Dynamic display & sound waves */
+#pulseaudio {
+    color: #b4befe; /* Catppuccin Lavender */
+    border-radius: 8px 0 0 8px;
+    padding-left: 14px;
+}
+
+#pulseaudio.muted {
+    color: #f38ba8; /* Turns Red when muted */
+}
+
+/* Tiny click targets */
+#custom-vol_minus {
+    color: #f5e0dc; /* Catppuccin Flamingo */
+    border-left: 1px solid #45475a;
+}
+
+#custom-vol_mute {
+    color: #f38ba8; /* Catppuccin Red */
+    border-left: 1px solid #45475a;
+}
+
+/* Far Right: Closes the capsule and pushes away from the system capsule */
+#custom-vol_plus {
+    color: #f5e0dc; 
+    border-radius: 0 8px 8px 0;
+    padding-right: 14px;
+    margin-right: 10px; /* Air gap between this capsule and the battery capsule */
+    border-left: 1px solid #45475a;
+}
+
+/* --- Bluetooth Capsule --- */
+#bluetooth {
+    background: #313244; /* Catppuccin Surface 0 */
+    color: #89b4fa; /* Catppuccin Blue */
+    font-weight: bold;
+    padding: 4px 14px;
+    margin: 5px 0;
+    border-radius: 8px;
+    margin-right: 10px; /* Air gap separating Bluetooth from your volume capsule */
+}
+
+#bluetooth.disabled,
+#bluetooth.disconnected {
+    color: #585b70; /* Dimmed out gray-blue when turned off or disconnected */
+}
+
+/* --- Brightness (Backlight) Capsule --- */
+#backlight {
+    background: #313244; /* Catppuccin Surface 0 */
+    color: #f9e2af; /* Catppuccin Yellow */
+    font-weight: bold;
+    padding: 4px 14px;
+    margin: 5px 0;
+    border-radius: 8px;
+    margin-right: 10px; /* Air gap separating Brightness from your volume capsule */
+}
+
+/* --- Network Capsule --- */
+#network {
+    background: #313244; /* Catppuccin Surface 0 */
+    color: #94e2d5; /* Catppuccin Teal */
+    font-weight: bold;
+    padding: 4px 14px;
+    margin: 5px 0;
+    border-radius: 8px;
+    margin-right: 10px; /* Air gap separating network from your volume capsule */
+}
+
+#network.disconnected {
+    color: #f38ba8; /* Catppuccin Red when offline */
+}
+
+tooltip {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    border: 1px solid #45475a;
+    padding: 8px;
+}
+
+#custom-power {
+    background: #313244;
+    color: #f38ba8;
+    font-weight: bold;
+    padding: 4px 14px;
+    margin: 5px 6px 5px 0;
+    border-radius: 8px;
+}
