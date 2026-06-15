@@ -187,3 +187,48 @@ hl.bind(secondMod .. " + Space", hl.dsp.exec_cmd("rofi -show run"))
 ```
 
 `SUPER+Space` opens the app launcher (drun), `SUPER+SHIFT+Space` opens the command runner (run).
+
+## Wallpaper (hyprpaper)
+
+```bash
+sudo pacman -S hyprpaper
+```
+
+### Config
+
+`hyprpaper.conf` uses absolute paths — `~` is not expanded by hyprpaper.
+
+[`dotfiles/hypr/hyprpaper.conf`](dotfiles/hypr/hyprpaper.conf):
+
+```ini
+preload = /home/onesmus/.config/wallpapers/wallpaper.jpg
+splash = false
+
+wallpaper {
+    monitor = eDP-1
+    path = /home/onesmus/.config/wallpapers/wallpaper.jpg
+    fit_mode = cover
+}
+```
+
+The wallpaper image is included at [`dotfiles/wallpapers/wallpaper.jpg`](dotfiles/wallpapers/wallpaper.jpg).
+
+```bash
+mkdir -p ~/.config/wallpapers ~/.config/hypr
+cp dotfiles/wallpapers/wallpaper.jpg ~/.config/wallpapers/
+cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr/
+```
+
+If using a different username, update the paths in `hyprpaper.conf` accordingly.
+
+hyprpaper is launched via `exec-once` in `hyprland.lua`:
+
+```lua
+hl.on("hyprland.start", function()
+    hl.exec_cmd("sleep 1 && hyprpaper")
+    hl.exec_cmd("waybar")
+    hl.exec_cmd("dunst")
+end)
+```
+
+The `sleep 1` gives the compositor time to initialize before hyprpaper attaches to the monitor.
