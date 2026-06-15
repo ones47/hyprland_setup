@@ -251,3 +251,21 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 ```
 
 `SUPER+E` opens yazi in a kitty window.
+
+## Dunst (Notifications)
+
+```bash
+sudo pacman -S dunst libnotify
+```
+
+Catppuccin Mocha themed — dark background, mauve border for normal notifications, red for critical, rounded corners.
+
+Volume and brightness keybinds in `hyprland.lua` trigger `notify-send` with the current level, using `x-canonical-private-synchronous` so rapid key presses replace rather than stack notifications.
+
+```bash
+mkdir -p ~/.config/dunst
+cp dotfiles/dunst/dunstrc ~/.config/dunst/
+```
+
+Launched via `exec-once` in `hyprland.lua`.
+
