@@ -49,4 +49,40 @@ fi
 The full Hyprland config is at [`dotfiles/hypr/hyprland.lua`](dotfiles/hypr/hyprland.lua).
 
 Copy it to `~/.config/hypr/hyprland.lua`.
-*Full documentation in progress.*
+
+## Zsh Setup
+
+Switch shell from bash to zsh:
+
+```bash
+sudo pacman -S zsh
+chsh -s /bin/zsh
+```
+
+The config includes a Catppuccin-themed two-line prompt, history settings, case-insensitive tab completion (bidirectional, so `adm` matches `ADMIN`), and useful aliases.
+
+The full config is at [`dotfiles/zsh/.zshrc`](dotfiles/zsh/.zshrc).
+
+Copy it to `~/.zshrc`:
+
+```bash
+cp dotfiles/zsh/.zshrc ~/.zshrc
+source ~/.zshrc
+```
+
+## Kitty Terminal
+
+```bash
+sudo pacman -S kitty ttf-jetbrains-mono-nerd
+```
+
+Kitty config sets Catppuccin Mocha colours, JetBrainsMono Nerd Font, transparency (0.85 opacity), and a powerline-style tab bar.
+
+The full config is at [`dotfiles/kitty/kitty.conf`](dotfiles/kitty/kitty.conf).
+
+Copy it to `~/.config/kitty/kitty.conf`:
+
+```bash
+mkdir -p ~/.config/kitty
+cp dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+```
