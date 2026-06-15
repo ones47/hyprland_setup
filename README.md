@@ -139,3 +139,51 @@ mkdir -p ~/.config/waybar
 cp dotfiles/waybar/config.jsonc ~/.config/waybar/
 cp dotfiles/waybar/style.css ~/.config/waybar/
 ```
+
+## Rofi
+
+```bash
+sudo pacman -S rofi-wayland
+```
+
+### Theme
+
+Using `rounded-red-dark.rasi` from [adi1090x/rofi-themes-collection](https://github.com/adi1090x/rofi-themes-collection).
+
+```bash
+git clone https://github.com/adi1090x/rofi-themes-collection.git ~/rofi-themes-collection
+mkdir -p ~/.local/share/rofi/themes
+cp ~/rofi-themes-collection/themes/rounded-red-dark.rasi ~/.local/share/rofi/themes/
+```
+
+### Config
+
+```bash
+mkdir -p ~/.config/rofi
+cp dotfiles/rofi/config.rasi ~/.config/rofi/
+```
+
+[`dotfiles/rofi/config.rasi`](dotfiles/rofi/config.rasi) just points to the theme:
+
+### Power Menu Script
+
+[`scripts/powermenu.sh`](scripts/powermenu.sh) provides a rofi-based power menu with shutdown, reboot, and logout (suspend and lock are placeholders for later, once hyprlock is configured).
+
+```bash
+mkdir -p ~/.config/rofi/scripts
+cp scripts/powermenu.sh ~/.config/rofi/scripts/
+chmod +x ~/.config/rofi/scripts/powermenu.sh
+```
+
+Triggered from the waybar power button (`custom/power` module).
+
+### Launcher Keybinds
+
+In `hyprland.lua`:
+
+```lua
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind(secondMod .. " + Space", hl.dsp.exec_cmd("rofi -show run"))
+```
+
+`SUPER+Space` opens the app launcher (drun), `SUPER+SHIFT+Space` opens the command runner (run).
