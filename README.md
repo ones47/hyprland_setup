@@ -232,3 +232,18 @@ end)
 ```
 
 The `sleep 1` gives the compositor time to initialize before hyprpaper attaches to the monitor.
+
+## File Manager (yazi)
+
+```bash
+sudo pacman -S yazi
+```
+
+TUI file manager with image preview support, bound in `hyprland.lua`:
+
+```lua
+local fileManager = "kitty -e yazi"
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+```
+
+`SUPER+E` opens yazi in a kitty window.
